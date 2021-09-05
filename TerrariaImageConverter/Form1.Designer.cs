@@ -88,6 +88,7 @@ namespace TerrariaImageConverter
             this.ImageLoad.TabIndex = 1;
             this.ImageLoad.Text = "Load";
             this.ImageLoad.UseVisualStyleBackColor = true;
+            this.ImageLoad.Click += new System.EventHandler(this.ImageLoad_Click);
             // 
             // ImagePath
             // 
@@ -177,6 +178,7 @@ namespace TerrariaImageConverter
             // 
             // Pixellation
             // 
+            this.Pixellation.Enabled = false;
             this.Pixellation.Location = new System.Drawing.Point(185, 196);
             this.Pixellation.Name = "Pixellation";
             this.Pixellation.Size = new System.Drawing.Size(75, 23);
