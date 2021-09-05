@@ -11,13 +11,13 @@ using Terraria;
 
 namespace TerrariaImageConverter
 {
-    public partial class Form1 : Form
+    public partial class TICMainForm : Form
     {
         Bitmap Image;
         Bitmap PixellatedImage;
         double XYRatio;
         double MultRatio;
-        public Form1()
+        public TICMainForm()
         {
             InitializeComponent();
         }
