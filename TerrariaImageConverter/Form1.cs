@@ -14,6 +14,9 @@ namespace TerrariaImageConverter
     public partial class Form1 : Form
     {
         Bitmap Image;
+        Bitmap PixellatedImage;
+        double XYRatio;
+        double MultRatio;
         public Form1()
         {
             InitializeComponent();
@@ -33,10 +36,27 @@ namespace TerrariaImageConverter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    ImagePath.Text = openFileDialog.FileName;
                     Image = new Bitmap(openFileDialog.FileName);
-                    pictureBox1.Image = Image;
+                    XYRatio = Image.Width / Image.Height;
+                    if (XYRatio <= 1.0f)
+                    {
+                        MultRatio = (double)(720.0 / (double)Image.Height);
+                    }
+                    else if (XYRatio > 1.0f)
+                    {
+                        MultRatio = (double)(1280.0 / (double)Image.Width);
+                    }
+                    PixelX.Value = Image.Width;
+                    PixelY.Value = Image.Height;
+                    pictureBox1.Image = new Bitmap(Image, new Size((int)(Image.Width * MultRatio), (int)(Image.Height * MultRatio)));
+                    Pixellation.Enabled = true;
                 }
             }
+        }
+
+        private void Pixellation_Click(object sender, EventArgs e)
+        {
         }
     }
 }

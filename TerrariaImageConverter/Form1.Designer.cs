@@ -42,13 +42,13 @@ namespace TerrariaImageConverter
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.PixelX = new System.Windows.Forms.NumericUpDown();
+            this.PixelY = new System.Windows.Forms.NumericUpDown();
             this.Pixellation = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PixelX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PixelY)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -162,19 +162,39 @@ namespace TerrariaImageConverter
             this.label8.TabIndex = 11;
             this.label8.Text = "PixelY";
             // 
-            // numericUpDown1
+            // PixelX
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(169, 130);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(91, 21);
-            this.numericUpDown1.TabIndex = 13;
+            this.PixelX.Location = new System.Drawing.Point(169, 130);
+            this.PixelX.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.PixelX.Name = "PixelX";
+            this.PixelX.Size = new System.Drawing.Size(91, 21);
+            this.PixelX.TabIndex = 13;
+            this.PixelX.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
-            // numericUpDown2
+            // PixelY
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(169, 157);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(91, 21);
-            this.numericUpDown2.TabIndex = 14;
+            this.PixelY.Location = new System.Drawing.Point(169, 157);
+            this.PixelY.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.PixelY.Name = "PixelY";
+            this.PixelY.Size = new System.Drawing.Size(91, 21);
+            this.PixelY.TabIndex = 14;
+            this.PixelY.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // Pixellation
             // 
@@ -185,6 +205,7 @@ namespace TerrariaImageConverter
             this.Pixellation.TabIndex = 15;
             this.Pixellation.Text = "Pixellation";
             this.Pixellation.UseVisualStyleBackColor = true;
+            this.Pixellation.Click += new System.EventHandler(this.Pixellation_Click);
             // 
             // label9
             // 
@@ -203,8 +224,8 @@ namespace TerrariaImageConverter
             this.ClientSize = new System.Drawing.Size(1564, 721);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.Pixellation);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.PixelY);
+            this.Controls.Add(this.PixelX);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -222,8 +243,8 @@ namespace TerrariaImageConverter
             this.Text = "Image2Json";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PixelX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PixelY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,8 +264,8 @@ namespace TerrariaImageConverter
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown PixelX;
+        private System.Windows.Forms.NumericUpDown PixelY;
         private System.Windows.Forms.Button Pixellation;
         private System.Windows.Forms.Label label9;
     }
