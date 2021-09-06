@@ -211,5 +211,15 @@ namespace TerrariaImageConverter
 
             return x | y;
         }
+
+        private void Pixel2Wall_Click(object sender, EventArgs e)
+        {
+            ImageViewer(ConvertPixellatedImage());
+        }
+
+        private Bitmap ConvertPixellatedImage()
+        {
+
+        }
     }
 }

@@ -49,6 +49,10 @@ namespace TerrariaImageConverter
             this.WidthHeightRatio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.Pixel2Wall = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelY)).BeginInit();
@@ -248,12 +252,53 @@ namespace TerrariaImageConverter
             this.progressBar1.Size = new System.Drawing.Size(151, 23);
             this.progressBar1.TabIndex = 19;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(205, 234);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 12);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "WallJson";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 246);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(263, 12);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "-------------------------------------------";
+            // 
+            // Pixel2Wall
+            // 
+            this.Pixel2Wall.Location = new System.Drawing.Point(169, 261);
+            this.Pixel2Wall.Name = "Pixel2Wall";
+            this.Pixel2Wall.Size = new System.Drawing.Size(91, 23);
+            this.Pixel2Wall.TabIndex = 22;
+            this.Pixel2Wall.Text = "PixelToWall";
+            this.Pixel2Wall.UseVisualStyleBackColor = true;
+            this.Pixel2Wall.Click += new System.EventHandler(this.Pixel2Wall_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 287);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(263, 12);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "-------------------------------------------";
+            // 
             // TICMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1564, 721);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.Pixel2Wall);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
@@ -307,6 +352,10 @@ namespace TerrariaImageConverter
         private System.Windows.Forms.Label WidthHeightRatio;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button Pixel2Wall;
+        private System.Windows.Forms.Label label12;
     }
 }
 
