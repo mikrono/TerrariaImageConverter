@@ -115,6 +115,7 @@ namespace TerrariaImageConverter
             this.SaveJson.TabIndex = 3;
             this.SaveJson.Text = "Save";
             this.SaveJson.UseVisualStyleBackColor = true;
+            this.SaveJson.Click += new System.EventHandler(this.SaveJson_Click);
             // 
             // label3
             // 
@@ -272,6 +273,7 @@ namespace TerrariaImageConverter
             // 
             // Pixel2Wall
             // 
+            this.Pixel2Wall.Enabled = false;
             this.Pixel2Wall.Location = new System.Drawing.Point(169, 261);
             this.Pixel2Wall.Name = "Pixel2Wall";
             this.Pixel2Wall.Size = new System.Drawing.Size(91, 23);

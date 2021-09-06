@@ -1,6 +1,8 @@
 TerrariaImageConverter
 ======================
 
+### Discontinued for now.
+
 ## TO DO
 - Check if the selected file is proper image file or not.
 - ~~Resize Image to make it fit to picturebox.~~
