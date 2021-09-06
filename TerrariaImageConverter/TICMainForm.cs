@@ -13,10 +13,12 @@ namespace TerrariaImageConverter
 {
     public partial class TICMainForm : Form
     {
-        Bitmap Image;
+        Bitmap TargetImage;
         Bitmap PixellatedImage;
         double XYRatio;
         double MultRatio;
+
+        bool debug = true;
         public TICMainForm()
         {
             InitializeComponent();
@@ -37,26 +39,171 @@ namespace TerrariaImageConverter
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     ImagePath.Text = openFileDialog.FileName;
-                    Image = new Bitmap(openFileDialog.FileName);
-                    XYRatio = Image.Width / Image.Height;
-                    if (XYRatio <= 1.0f)
-                    {
-                        MultRatio = (double)(720.0 / (double)Image.Height);
-                    }
-                    else if (XYRatio > 1.0f)
-                    {
-                        MultRatio = (double)(1280.0 / (double)Image.Width);
-                    }
-                    PixelX.Value = Image.Width;
-                    PixelY.Value = Image.Height;
-                    pictureBox1.Image = new Bitmap(Image, new Size((int)(Image.Width * MultRatio), (int)(Image.Height * MultRatio)));
+                    TargetImage = new Bitmap(openFileDialog.FileName);
+
+                    PixelX.Maximum = TargetImage.Width;
+                    PixelY.Maximum = TargetImage.Height;
                     Pixellation.Enabled = true;
+                    progressBar1.Value = 0;
+
+                    ImageViewer(TargetImage);
+
                 }
             }
         }
 
         private void Pixellation_Click(object sender, EventArgs e)
         {
+            ImageViewer(Do_pixellation((int)PixelX.Value, (int)PixelY.Value));
+        }
+
+        private void ImageViewer(Bitmap Image)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                int imagewidth = Image.Width;
+                int imageheight = Image.Height;
+
+                XYRatio = imagewidth / imageheight;
+
+                if (XYRatio <= 1.0f)
+                {
+                    MultRatio = (double)(720.0 / (double)Image.Height);
+                }
+                else if (XYRatio > 1.0f)
+                {
+                    MultRatio = (double)(1280.0 / (double)Image.Width);
+                }
+                PixelX.Value = imagewidth;
+                PixelY.Value = imageheight;
+
+                int GCDofWidthHeight = GCD(imagewidth, imageheight);
+                WidthHeightRatio.Text = $"{imagewidth / GCDofWidthHeight} : {imageheight / GCDofWidthHeight}";
+
+                pictureBox1.Image = new Bitmap(Image, new Size((int)(Image.Width * MultRatio), (int)(Image.Height * MultRatio)));
+
+            });
+        }
+
+        private Bitmap Do_pixellation(int desiredX, int desiredY)
+        {
+            progressBar1.Value = 0;
+
+            int TargetWidth = TargetImage.Width;
+            int TargetHeight = TargetImage.Height;
+
+            PixellatedImage = new Bitmap(TargetWidth, TargetHeight);
+
+            /*
+            int widthDividedByX = flooredDivision(TargetImage.Width, desiredX);
+            int heightDividedByY = flooredDivision(TargetImage.Height, desiredY);
+            */
+            double widthDividedByX = (double)TargetWidth / (double)desiredX;
+            double heightDividedByY = (double)TargetHeight / (double)desiredY;
+
+            // Console.WriteLine($"{widthDividedByX}, {heightDividedByY}");
+
+            int size_of_pixellated_unit = (int)(widthDividedByX * heightDividedByY);
+
+            if (debug)
+            {
+                Console.WriteLine($"Width divided by PixelX : {widthDividedByX}, Height divided by PixelY : {heightDividedByY}, Size of pixel unit : {size_of_pixellated_unit}");
+            }
+
+            int A, R, G, B;
+            int pixelX;
+            int pixelY;
+            int setPixelX;
+            int setPixelY;
+
+
+            Color color;
+
+            for (int i = 0; i < TargetWidth * TargetHeight; i++)
+            {
+                A = 0;
+                R = 0;
+                G = 0;
+                B = 0;
+
+                for (int j = 0; j < widthDividedByX; j++)
+                {
+
+                    pixelX = (int)((i % desiredX) * widthDividedByX) + j;  
+
+                    for (int k = 0; k < heightDividedByY; k++)
+                    {
+
+                        pixelY = (int)(i / desiredX * heightDividedByY) + k;
+
+
+                        if (debug)
+                        {
+                            Console.WriteLine($"index : {i} GetPixel X : {pixelX} Y : {pixelY}");
+                        }
+
+                        
+                        color = TargetImage.GetPixel(pixelX, pixelY);
+                        A += color.A;
+                        R += color.R;
+                        G += color.G;
+                        B += color.B;
+
+                    }
+                }
+
+                // R 
+                if ((R / size_of_pixellated_unit) > 255)
+                    R /= (size_of_pixellated_unit + 1);
+                else
+                    R /= size_of_pixellated_unit;
+
+                // G
+                if ((G / size_of_pixellated_unit) > 255)
+                    G /= (size_of_pixellated_unit + 1);
+                else
+                    G /= size_of_pixellated_unit;
+
+                // B
+                if ((B / size_of_pixellated_unit) > 255)
+                    B /= (size_of_pixellated_unit + 1);
+                else
+                    B /= size_of_pixellated_unit;
+                
+                // A
+                if ((A / size_of_pixellated_unit) <= 10)
+                {
+                    R = 255;
+                    G = 255;
+                    B = 255;
+                }
+
+
+                setPixelX = (i % TargetWidth);
+                setPixelY = i / TargetWidth;
+
+                if (debug)
+                {
+                    Console.WriteLine($"index : {i} setPixel X : {setPixelX} Y : {setPixelY}");
+                }
+
+                PixellatedImage.SetPixel(setPixelX, setPixelY, Color.FromArgb(R, G, B));
+                progressBar1.Value = (int)((double)(i + 1) / (double)(TargetWidth * TargetHeight) * 100);
+            }
+
+            return PixellatedImage;
+        }
+        private static int GCD(int x, int y)
+        {
+            while (x != 0 && y != 0)
+            {
+                if (x > y)
+                    x %= y;
+                else
+                    y %= x;
+            }
+
+            return x | y;
         }
     }
 }

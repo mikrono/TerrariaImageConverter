@@ -46,9 +46,13 @@ namespace TerrariaImageConverter
             this.PixelY = new System.Windows.Forms.NumericUpDown();
             this.Pixellation = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.WidthHeightRatio = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelY)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -216,12 +220,42 @@ namespace TerrariaImageConverter
             this.label9.TabIndex = 16;
             this.label9.Text = "-------------------------------------------";
             // 
-            // Form1
+            // WidthHeightRatio
+            // 
+            this.WidthHeightRatio.AutoSize = true;
+            this.WidthHeightRatio.BackColor = System.Drawing.Color.White;
+            this.WidthHeightRatio.ForeColor = System.Drawing.Color.Black;
+            this.WidthHeightRatio.Location = new System.Drawing.Point(38, 17);
+            this.WidthHeightRatio.Name = "WidthHeightRatio";
+            this.WidthHeightRatio.Size = new System.Drawing.Size(29, 12);
+            this.WidthHeightRatio.TabIndex = 17;
+            this.WidthHeightRatio.Text = "1 : 1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.WidthHeightRatio);
+            this.groupBox1.Location = new System.Drawing.Point(14, 132);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(102, 46);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ratio";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 196);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(151, 23);
+            this.progressBar1.TabIndex = 19;
+            // 
+            // TICMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1564, 721);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.Pixellation);
             this.Controls.Add(this.PixelY);
@@ -239,12 +273,14 @@ namespace TerrariaImageConverter
             this.Controls.Add(this.ImageLoad);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "TICMainForm";
             this.Text = "Image2Json";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PixelY)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,6 +304,9 @@ namespace TerrariaImageConverter
         private System.Windows.Forms.NumericUpDown PixelY;
         private System.Windows.Forms.Button Pixellation;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label WidthHeightRatio;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
