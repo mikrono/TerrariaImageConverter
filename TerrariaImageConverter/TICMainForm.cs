@@ -92,7 +92,7 @@ namespace TerrariaImageConverter
             int TargetWidth = TargetImage.Width;
             int TargetHeight = TargetImage.Height;
 
-            PixellatedImage = new Bitmap(TargetWidth, TargetHeight);
+            PixellatedImage = new Bitmap(desiredX, desiredY);
 
             /*
             int widthDividedByX = flooredDivision(TargetImage.Width, desiredX);
@@ -103,7 +103,7 @@ namespace TerrariaImageConverter
 
             // Console.WriteLine($"{widthDividedByX}, {heightDividedByY}");
 
-            int size_of_pixellated_unit = (int)(widthDividedByX * heightDividedByY);
+            double size_of_pixellated_unit = widthDividedByX * heightDividedByY;
 
             if (debug)
             {
@@ -115,16 +115,17 @@ namespace TerrariaImageConverter
             int pixelY;
             int setPixelX;
             int setPixelY;
-
+            int pixelcount;
 
             Color color;
 
-            for (int i = 0; i < TargetWidth * TargetHeight; i++)
+            for (int i = 0; i < desiredX * desiredY; i++)
             {
                 A = 0;
                 R = 0;
                 G = 0;
                 B = 0;
+                pixelcount = 0;
 
                 for (int j = 0; j < widthDividedByX; j++)
                 {
@@ -133,7 +134,7 @@ namespace TerrariaImageConverter
 
                     for (int k = 0; k < heightDividedByY; k++)
                     {
-
+                        pixelcount++;
                         pixelY = (int)(i / desiredX * heightDividedByY) + k;
 
 
@@ -151,36 +152,41 @@ namespace TerrariaImageConverter
 
                     }
                 }
-
+                /*
                 // R 
                 if ((R / size_of_pixellated_unit) > 255)
-                    R /= (size_of_pixellated_unit + 1);
+                    R /= (int)(size_of_pixellated_unit + 1);
                 else
-                    R /= size_of_pixellated_unit;
+                    R /= (int)size_of_pixellated_unit;
 
                 // G
                 if ((G / size_of_pixellated_unit) > 255)
-                    G /= (size_of_pixellated_unit + 1);
+                    G /= (int)(size_of_pixellated_unit + 1);
                 else
-                    G /= size_of_pixellated_unit;
+                    G /= (int)size_of_pixellated_unit;
 
                 // B
                 if ((B / size_of_pixellated_unit) > 255)
-                    B /= (size_of_pixellated_unit + 1);
+                    B /= (int)(size_of_pixellated_unit + 1);
                 else
-                    B /= size_of_pixellated_unit;
-                
+                    B /= (int)size_of_pixellated_unit;
+                */
                 // A
-                if ((A / size_of_pixellated_unit) <= 10)
+
+                if ((A / pixelcount) <= 250)
                 {
                     R = 255;
                     G = 255;
                     B = 255;
                 }
 
+                R /= pixelcount;
+                G /= pixelcount;
+                B /= pixelcount;
 
-                setPixelX = (i % TargetWidth);
-                setPixelY = i / TargetWidth;
+
+                setPixelX = i % desiredX;
+                setPixelY = i / desiredX;
 
                 if (debug)
                 {
@@ -188,7 +194,7 @@ namespace TerrariaImageConverter
                 }
 
                 PixellatedImage.SetPixel(setPixelX, setPixelY, Color.FromArgb(R, G, B));
-                progressBar1.Value = (int)((double)(i + 1) / (double)(TargetWidth * TargetHeight) * 100);
+                progressBar1.Value = (int)((double)(i + 1) / (double)(desiredX * desiredY) * 100);
             }
 
             return PixellatedImage;
